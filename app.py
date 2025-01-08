@@ -52,7 +52,7 @@ def scrape_product_details(url, headers):
 # Route to render the HTML form
 @app.route('/')
 def index():
-    return render_template('index.html')  # Ensure the HTML file is in the 'templates' folder
+    return render_template('https://github.com/PrasannaV2633/bookatcampus.git')  # Ensure the HTML file is in the 'templates' folder
 
 
 # Route to handle file upload and processing
