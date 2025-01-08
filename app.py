@@ -1,10 +1,11 @@
-from flask import Flask, request, render_template, send_file, jsonify
+from flask import Flask, request, render_template, send_file, jsonify, Response
 import pandas as pd
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 import os
 import requests
 from bs4 import BeautifulSoup
+
 
 app = Flask(__name__)
 
@@ -52,8 +53,13 @@ def scrape_product_details(url, headers):
 # Route to render the HTML form
 @app.route('/')
 def index():
-    return render_template('https://github.com/PrasannaV2633/bookatcampus.git')  # Ensure the HTML file is in the 'templates' folder
-
+    # return render_template('index.html')  # Ensure the HTML file is in the 'templates' folder
+    url = "https://prasannav2633.github.io/bookatcampus/"  # Replace with actual raw URL
+    response = requests.get(url)
+    if response.status_code == 200:
+        return Response(response.content, mimetype='text/html')
+    else:
+        return "Error fetching the index.html file", 404
 
 # Route to handle file upload and processing
 @app.route('/upload', methods=['POST'])
